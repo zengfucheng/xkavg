@@ -1,28 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import { connect } from 'react-redux';
+
+import Router from './router/index';
+import {editAddData} from "./actions/editAction";
+
+import HeaderView from './components/HeaderView';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+          <HeaderView/>
+          <Router/>
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+    return {
+        title: state.EditReducer.title,
+        value: state.EditReducer.name,
+        login: state.EditReducer.login,
+        users: state.EditReducer.users
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(App);
